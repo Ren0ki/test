@@ -1,35 +1,140 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import About from "./components/About";
+import Banner from "./components/Banner";
+import Navbar from "./components/Navbar";
+import Card from "./components/Card";
+import Wrapper from "./components/Wrapper";
+import image_jenny from "./assets/jenny.png";
+import image_alina from "./assets/alina.png";
+import image_renee from "./assets/renee.png";
+import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import ProfileForm from "./components/ProfileForm";
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const App = () => {
+
+  const profiles = [
+
+    {
+      img: image_alina,
+      name: "Gummy Buddy ",
+      title: "Medical",
+      email: "gbudd@email.com",
+    },
+    {
+      img: image_jenny,
+      name: "Jen Fucious ",
+      title: "Communications",
+      email: "jfuci@email.com",
+    },
+    {
+      img: image_renee,
+      name: "Jelly Chan",
+      title: "Computation",
+      email: "jchan@email.com",
+    },
+  ];
+
+  // Remember to store AND update
+  const [animation, setAnimation] = useState(false);
+  const handleAnimation = () => {
+    setAnimation(false);
+  };
+
+  const [mode, setMode] = useState("light");
+  const handleModeChange = () => {
+    setMode(mode = "light");
+  };
+
+  const titles = [...new Set(profiles.map((profile) => profile.title))];
+  const [title, setTitle] = useState("");
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+    setAnimation(true);
+  };
+
+  const [search, setSearch] = useState("");
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+    setAnimation(true);
+  };
+
+  const handleClear = () => {
+    setTitle("");
+    setSearch("");
+    setAnimation(true);
+  };
+
+  const filteredProfiles = profiles.filter(
+    (profile) =>
+     (title === "" || profile.title === title) &&
+      profile.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const buttonStyle = {
+    border: "1px solid #ccc",
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <Navbar mode={mode} updateMode={handleModeChange}/>
+      </header>
+        <Wrapper>
+          <Banner />
+        </Wrapper>
+        <Wrapper>
+          <About />
+        </Wrapper>
+        <Wrapper>
+          <ProfileForm />
+        </Wrapper>
+        <Wrapper>
+          <div className="filter-wrapper">
+            <div className="filter--select">
+              <label htmlFor="title-select">Select a field:  </label>
+              <select
+                id="title-select"
+                onChange={handleTitleChange}
+                value={title}
+              >
+                <option value="">All</option>
+                {titles.map((title) => (
+                  <option key={title} value={title}>
+                    {title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="filter--search">
+              <label htmlFor="search">Search by name:  </label>
+              <input
+                type="text"
+                id="search"
+                onChange={handleSearchChange}
+                value={search}
+              />
+            </div>
+            <button onClick={handleClear} style={buttonStyle}>
+              <span className="sr-only">Reset</span>
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          </div>
+          <div className="profile-cards">
+            {filteredProfiles.map((profile) => (
+              <Card
+                key={profile.email}
+                {...profile}
+                animate={animation}
+                updateAnimate={handleAnimation}
+              />
+            ))}
+          </div>
+        </Wrapper>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
