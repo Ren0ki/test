@@ -40,16 +40,20 @@ const App = () => {
   // Remember to store AND update
   const [animation, setAnimation] = useState(false);
   const handleAnimation = () => {
-    setAnimation(false);
-  };
-
-  const [mode, setMode] = useState("light");
-  const handleModeChange = () => {
-    setMode(mode = "light");
+  setAnimation(false);
   };
 
   const titles = [...new Set(profiles.map((profile) => profile.title))];
   const [title, setTitle] = useState("");
+  
+  /*useEffect(() => {
+    fetch("https...")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+});
+  
+  });*/
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
     setAnimation(true);
@@ -80,7 +84,7 @@ const App = () => {
   return (
     <>
       <header>
-        <Navbar mode={mode} updateMode={handleModeChange}/>
+        <Navbar />
       </header>
         <Wrapper>
           <Banner />
