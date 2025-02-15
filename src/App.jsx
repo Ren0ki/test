@@ -54,6 +54,7 @@ const App = () => {
 });
   
   });*/
+
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
     setAnimation(true);
@@ -102,8 +103,7 @@ const App = () => {
               <select
                 id="title-select"
                 onChange={handleTitleChange}
-                value={title}
-              >
+                value={title}>
                 <option value="">All</option>
                 {titles.map((title) => (
                   <option key={title} value={title}>
@@ -126,6 +126,8 @@ const App = () => {
               <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>
+          <h3> <br /> Current Collaborators: </h3>
+          <h3> - - - - - - - - - - - - - -</h3>
           <div className="profile-cards">
             {filteredProfiles.map((profile) => (
               <Card
@@ -133,9 +135,23 @@ const App = () => {
                 {...profile}
                 animate={animation}
                 updateAnimate={handleAnimation}
-              />
+              /> 
+
+              /*
+              {count === 0 && <p> No profiles found! </p>}
+              {count > 10
+              <div  className="pagination">
+              
+                <button onClick {() => setPage(page - 1)} disabled={page === 1}> Previous </button>
+                <span> {page}/{Math.ceiling(count/10)} </span>
+                <button onClick {() => setPage(page + 1)} disabled={page >= Math.ceil(count/10)}> Next </button> 
+
+              </div>
+            }
+              */
             ))}
-          </div>
+          </div> 
+        
         </Wrapper>
     </>
   );

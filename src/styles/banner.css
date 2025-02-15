@@ -6,4 +6,5 @@
     text-align: center;
     padding: 50px;
     box-shadow: var(--box-shadow);
+    border: 5px outset var(--primary-background-color);
 }

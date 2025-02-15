@@ -1,6 +1,6 @@
 .navbar {
 
-    background-color: var(--secondary-background-color);
+    background-color: var(--primary-background-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,7 +18,7 @@
             margin-bottom: 0;
 
             a{
-                color: var(--button-text-color);
+                color: #fff;
             }
 
             a:hover{
