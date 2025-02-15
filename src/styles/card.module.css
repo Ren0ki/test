@@ -1,10 +1,10 @@
 @keyframes cardEnter {
 
     0% {
-
         opacity: 0;
         transform: scale(0.9);
     }
+
     100% {
         opacity: 1;
         tranform: scale(1);
@@ -23,18 +23,22 @@
     margin: 0.75rem;
    
     &.is-entering {
+
         opacity: 0;
         transform: scale(0.9);
         animation: cardEnter 0.5s forwards;
+
     }
 
-    .profile-card__image {
+    .profile-card-image {
+
         width: 100%;
         padding-top: 100%;
         border-radius: 100%;
         margin: 0 auto;
         position: relative;
         overflow: hidden;
+
     }
 
     img{
@@ -48,11 +52,12 @@
 
     }
     
-
     p{
+
         padding-top: 5%;
         margin: 0;
         color: #fff;
+
     }
 
 }

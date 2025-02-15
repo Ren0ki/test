@@ -4,6 +4,7 @@
     background-size: cover;
     align-content: center;
     text-align: center;
+    margin-top: 4rem;
     padding: 50px;
     box-shadow: var(--box-shadow);
     border: 5px outset var(--primary-background-color);
